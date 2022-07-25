@@ -7,6 +7,13 @@ app.get('/', (req, res) => {
   res.send('Hello World!');
 })
 
+app.get('/products', (req, res) => {
+  res.json({
+    name: 'Producto 1',
+    price: '$100'
+  });
+})
+
 app.listen(port, () => {
   console.log('mi port ' + port);
 });
