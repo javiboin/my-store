@@ -13,20 +13,26 @@ router.get('/', (req, res) => {
       name: faker.name.jobDescriptor()
     })
   }
-  res.json(categories);
+  res.status(200).json(categories);
 });
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({
-    id,
-    name: 'Customer'
-  })
+  if (id === 999) {
+    res.status(404).json({
+      message: 'Not Found'
+    })
+  } else {
+    res.status(200).json({
+      id,
+      name: 'Customer'
+    })
+  }
 })
 
 router.post('/', (req, res) => {
   const body = req.body;
-  res.json({
+  res.status(201).json({
     message: 'created',
     data: body
   })
@@ -35,7 +41,7 @@ router.post('/', (req, res) => {
 router.put('/', (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  res.json({
+  res.status(200).json({
     message: 'update',
     data: body,
     id,
@@ -45,7 +51,7 @@ router.put('/', (req, res) => {
 router.patch('/', (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  res.json({
+  res.status(200).json({
     message: 'update',
     data: body,
     id,
@@ -54,7 +60,7 @@ router.patch('/', (req, res) => {
 
 router.delete('/', (req, res) => {
   const { id } = req.params;
-  res.json({
+  res.status(200).json({
     message: 'delete',
     id,
   })
