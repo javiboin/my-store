@@ -15,22 +15,28 @@ router.get('/', (req, res) => {
       password: faker.internet.password(20),
     })
   }
-  res.json(users);
+  res.status(200).json(users);
 })
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  res.json({
-    id,
-    name: 'Name 1',
-    email: 'javi@gmail.com',
-    password: 'Password'
-  })
+  if (id === 999) {
+    res.status(404).json({
+      message: 'Not Found'
+    })
+  } else {
+    res.status(200).json({
+      id,
+      name: 'Name 1',
+      email: 'javi@gmail.com',
+      password: 'Password'
+    })
+  }
 })
 
 router.post('/', (req, res) => {
   const body = req.body;
-  res.json({
+  res.status(201).json({
     message: 'created',
     data: body
   })
@@ -39,7 +45,7 @@ router.post('/', (req, res) => {
 router.put('/', (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  res.json({
+  res.status(200).json({
     message: 'update',
     data: body,
     id,
@@ -49,7 +55,7 @@ router.put('/', (req, res) => {
 router.patch('/', (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  res.json({
+  res.status(200).json({
     message: 'update',
     data: body,
     id,
@@ -58,7 +64,7 @@ router.patch('/', (req, res) => {
 
 router.delete('/', (req, res) => {
   const { id } = req.params;
-  res.json({
+  res.status(200).json({
     message: 'delete',
     id,
   })
