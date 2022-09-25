@@ -41,7 +41,11 @@ class ProductService {
     if (index === -1) {
       throw new Error('product not found');
     }
-    this.products[index] = changes;
+    const product = this.products[index];
+    this.products[index] = {
+      ...product,
+      ...changes
+    };
     return this.products[index];
   }
 
