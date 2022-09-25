@@ -18,8 +18,13 @@ class UserService {
     }
   }
 
-  create() {
-
+  create(data) {
+    const newUser = {
+      id: faker.datatype.uuid(),
+      ...data
+    }
+    this.users.push(newUser);
+    return newUser;
   }
 
   find() {
