@@ -1,33 +1,18 @@
 const express = require('express');
-const { faker } = require('@faker-js/faker');
+const CategoryService = require('../services/categories.service');
 
 const router = express.Router();
+const service = new CategoryService();
 
 router.get('/', (req, res) => {
-  const categories = [];
-  const { size } = req.query;
-  const limit = size || 10;
-
-  for (let index = 0; index < limit; index++) {
-    categories.push({
-      name: faker.name.jobDescriptor()
-    })
-  }
+  const categories = service.finc();
   res.status(200).json(categories);
 });
 
 router.get('/:id', (req, res) => {
   const { id } = req.params;
-  if (id === 999) {
-    res.status(404).json({
-      message: 'Not Found'
-    })
-  } else {
-    res.status(200).json({
-      id,
-      name: 'Customer'
-    })
-  }
+  const categories = service.findOne(id);
+  res.status(200).json(categories);
 })
 
 router.post('/', (req, res) => {
