@@ -16,8 +16,13 @@ class CategoryService{
     }
   }
 
-  create() {
-
+  create(data) {
+    const newCategory = {
+      id: faker.datatype.uuid(),
+      ...data
+    }
+    this.categories.push(newCategory);
+    return newCategory;
   }
 
   find() {
