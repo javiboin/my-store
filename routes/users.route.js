@@ -38,10 +38,8 @@ router.patch('/', (req, res) => {
 
 router.delete('/', (req, res) => {
   const { id } = req.params;
-  res.status(200).json({
-    message: 'delete',
-    id,
-  })
+  const user = service.delete(id);
+  res.status(200).json(user)
 })
 
 module.exports = router;

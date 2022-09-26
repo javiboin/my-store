@@ -48,10 +48,14 @@ class UserService {
     return this.users[index];
   }
 
-  delete() {
-
+  delete(id) {
+    const index = this.users.findIndex(item => item.id === id);
+    if (index === -1) {
+      throw new Error('user not found')
+    }
+    this.users.splice(index, 1);
+    return { id };
   }
-
 }
 
 module.exports = UserService;
