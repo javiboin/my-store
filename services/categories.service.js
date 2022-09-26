@@ -46,8 +46,13 @@ class CategoryService{
     return this.categories[index];
   }
 
-  delete() {
-
+  delete(id) {
+    const index = this.categories.findIndex(item => item.id === id);
+    if (index === -1) {
+      throw new Error('category not found');
+    }
+    this.categories.splice(index, 1);
+    return { id };
   }
 
 }
