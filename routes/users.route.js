@@ -25,21 +25,15 @@ router.post('/', (req, res) => {
 router.put('/', (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  res.status(200).json({
-    message: 'update',
-    data: body,
-    id,
-  })
+  const user = service.update(id, body);
+  res.status(200).json(user)
 })
 
 router.patch('/', (req, res) => {
   const { id } = req.params;
   const body = req.body;
-  res.status(200).json({
-    message: 'update',
-    data: body,
-    id,
-  })
+  const user = service.update(id, body);
+  res.status(200).json(user)
 })
 
 router.delete('/', (req, res) => {
