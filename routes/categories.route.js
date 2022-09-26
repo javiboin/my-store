@@ -4,41 +4,77 @@ const CategoryService = require('../services/categories.service');
 const router = express.Router();
 const service = new CategoryService();
 
-router.get('/', (req, res) => {
-  const categories = service.finc();
-  res.status(200).json(categories);
+router.get('/', async (req, res) => {
+  try {
+    const categories = await service.find();
+    res.status(200).json(categories);
+  } catch (error) {
+    res.status(404).json({
+      message: error.message
+    })
+  }
 });
 
-router.get('/:id', (req, res) => {
-  const { id } = req.params;
-  const categories = service.findOne(id);
-  res.status(200).json(categories);
+router.get('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const categories = await service.findOne(id);
+    res.status(200).json(categories);
+  } catch (error) {
+    res.status(404).json({
+      message: error.message
+    })
+  }
 })
 
-router.post('/', (req, res) => {
-  const body = req.body;
-  const newCategory = service.create(body);
-  res.status(201).json(newCategory)
+router.post('/', async (req, res) => {
+  try {
+    const body = req.body;
+    const newCategory = await service.create(body);
+    res.status(201).json(newCategory)
+  } catch (error) {
+    res.status(404).json({
+      message: error.message
+    })
+  }
 })
 
-router.put('/', (req, res) => {
-  const { id } = req.params;
-  const body = req.body;
-  const category = service.update(id, body);
-  res.status(200).json(category)
+router.put('/', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const category = await service.update(id, body);
+    res.status(200).json(category)
+  } catch (error) {
+    res.status(404).json({
+      message: error.message
+    })
+  }
 })
 
-router.patch('/', (req, res) => {
-  const { id } = req.params;
-  const body = req.body;
-  const category = service.update(id, body);
-  res.status(200).json(category)
+router.patch('/', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const body = req.body;
+    const category = await service.update(id, body);
+    res.status(200).json(category)
+  } catch (error) {
+    res.status(404).json({
+      message: error.message
+    })
+  }
 })
 
-router.delete('/', (req, res) => {
-  const { id } = req.params;
-  const category = service.delete(id);
-  res.status(200).json(category)
+router.delete('/', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const category = await service.delete(id);
+    res.status(200).json(category)
+  } catch (error) {
+    res.status(404).json({
+      message: error.message
+    })
+  }
 })
 
 module.exports = router;
