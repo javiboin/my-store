@@ -11,12 +11,12 @@ const updateCategorySchema = Joi.object({
   name: name,
 })
 
-const deleteCategorySchema = Joi.object({
+const getCategorySchema = Joi.object({
   id: id.required()
 })
 
 module.exports = {
   createCategorySchema,
   updateCategorySchema,
-  deleteCategorySchema
+  getCategorySchema
 }

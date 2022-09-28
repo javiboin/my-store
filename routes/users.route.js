@@ -1,8 +1,9 @@
 const express = require('express');
 const UserService = require('../services/users.service');
+const validatorHandler = require('../middlewares/validator.handler');
+const { createUserSchema, updateUserSchema, getUserSchema } = require('../schemas/users.schema');
 
 const router = express.Router();
-
 const service = new UserService();
 
 router.get('/', (req, res) => {
@@ -16,66 +17,73 @@ router.get('/', (req, res) => {
   }
 })
 
-router.get('/:id', (req, res) => {
-  try {
-    const { id } = req.params;
-    const users = service.findOne(id);
-    res.status(200).json(users);
-  } catch (error) {
-    res.status(404).json({
-      message: error.messages
-    })
+router.get('/:id',
+  validatorHandler(getUserSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const users = service.findOne(id);
+      res.status(200).json(users);
+    } catch (error) {
+      next(error);
+    }
   }
-})
+)
 
-router.post('/', (req, res) => {
-  try {
-    const body = req.body;
-    const newUser = service.create(body);
-    res.status(201).json(newUser)
-  } catch (error) {
-    res.status(404).json({
-      message: error.message
-    })
+router.post('/',
+  validatorHandler(createUserSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const body = req.body;
+      const newUser = service.create(body);
+      res.status(201).json(newUser)
+    } catch (error) {
+      next(error);
+    }
   }
-})
+)
 
-router.put('/', (req, res) => {
-  try {
-    const { id } = req.params;
-    const body = req.body;
-    const user = service.update(id, body);
-    res.status(200).json(user)
-  } catch (error) {
-    res.status(404).json({
-      message: error.message
-    })
+router.put('/',
+  validatorHandler(getUserSchema, 'params'),
+  validatorHandler(updateUserSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const user = service.update(id, body);
+      res.status(200).json(user)
+    } catch (error) {
+      next(error);
+    }
   }
-})
+)
 
-router.patch('/', (req, res) => {
-  try {
-    const { id } = req.params;
-    const body = req.body;
-    const user = service.update(id, body);
-    res.status(200).json(user)
-  } catch (error) {
-    res.status(404).json({
-      message: error.message
-    })
+router.patch('/',
+  validatorHandler(getUserSchema, 'params'),
+  validatorHandler(updateUserSchema, 'body'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const body = req.body;
+      const user = service.update(id, body);
+      res.status(200).json(user)
+    } catch (error) {
+      next(error);
+    }
   }
-})
+)
 
-router.delete('/', (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = service.delete(id);
-    res.status(200).json(user)
-  } catch (error) {
-    res.status(404).json({
-      message: error.message
-    })
+router.delete('/',
+  validatorHandler(getUserSchema, 'params'),
+  async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const user = service.delete(id);
+      res.status(200).json(user)
+    } catch (error) {
+      next(error);
+    }
   }
-})
+)
 
 module.exports = router;
