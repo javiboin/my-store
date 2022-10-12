@@ -43,7 +43,7 @@ router.post('/',
   }
 )
 
-router.put('/',
+router.put('/:id',
   validatorHandler(getUserSchema, 'params'),
   validatorHandler(updateUserSchema, 'body'),
   async (req, res, next) => {
@@ -58,7 +58,7 @@ router.put('/',
   }
 )
 
-router.patch('/',
+router.patch('/:id',
   validatorHandler(getUserSchema, 'params'),
   validatorHandler(updateUserSchema, 'body'),
   async (req, res, next) => {
@@ -73,7 +73,7 @@ router.patch('/',
   }
 )
 
-router.delete('/',
+router.delete('/:id',
   validatorHandler(getUserSchema, 'params'),
   async (req, res, next) => {
     try {

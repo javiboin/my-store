@@ -41,7 +41,7 @@ router.post('/',
   }
 )
 
-router.put('/',
+router.put('/:id',
   validatorHandler(getCategorySchema, 'params'),
   validatorHandler(updateCategorySchema, 'body'),
   async (req, res, next) => {
@@ -56,7 +56,7 @@ router.put('/',
   }
 )
 
-router.patch('/',
+router.patch('/:id',
   validatorHandler(getCategorySchema, 'params'),
   validatorHandler(updateCategorySchema, 'body'),
   async (req, res, next) => {
@@ -71,7 +71,7 @@ router.patch('/',
   }
 )
 
-router.delete('/',
+router.delete('/:id',
   validatorHandler(getCategorySchema, 'params'),
   async (req, res, next) => {
     try {
