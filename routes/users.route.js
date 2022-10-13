@@ -6,14 +6,12 @@ const { createUserSchema, updateUserSchema, getUserSchema } = require('../schema
 const router = express.Router();
 const service = new UserService();
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res, next) => {
   try {
-    const users = service.find();
+    const users = await service.find();
     res.status(200).json(users);
   } catch (error) {
-    res.status(404).json({
-      message: error.message
-    })
+    next(error);
   }
 })
 
