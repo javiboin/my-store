@@ -5,7 +5,7 @@ async function getConnection() {
     host: 'localhost',
     port: 5432,
     user: 'nico',
-    password: 'admin 123',
+    password: 'admin123',
     database: 'my_store'
   });
 
