@@ -1,7 +1,8 @@
 const { faker } = require('@faker-js/faker');
 const boom = require('@hapi/boom');
 
-const getConnection = require('../libs/postgres');
+//const getConnection = require('../libs/postgres');
+const { models } = require('../libs/sequelize');
 
 class UserService {
   constructor() {
@@ -31,14 +32,8 @@ class UserService {
   }
 
   async find() {
-    const client = await getConnection();
-    const rta = await client.query('SELECT * FROM tasks');
-    return rta.rows;
-    /* return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(this.users)
-      }, 3000);
-    }); */
+    const data = await models.User.findAll();
+    return data;
   }
 
   async findOne(id) {
