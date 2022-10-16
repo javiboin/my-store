@@ -1,4 +1,4 @@
-const { faker } = require('@faker-js/faker');
+//const { faker } = require('@faker-js/faker');
 const boom = require('@hapi/boom');
 
 //const getConnection = require('../libs/postgres');
@@ -6,11 +6,11 @@ const { models } = require('../libs/sequelize');
 
 class UserService {
   constructor() {
-    this.users = [];
-    this.generate();
+/*     this.users = [];
+    this.generate(); */
   }
 
-  generate() {
+  /* generate() {
     const limit = 100;
     for (let index = 0; index < limit; index++) {
       this.users.push({
@@ -20,7 +20,7 @@ class UserService {
         password: faker.internet.password(20),
       });
     }
-  }
+  } */
 
   async create(data) {
     const newUser = await models.User.create(data);
